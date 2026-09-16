@@ -126,8 +126,6 @@ responding to a second, more detailed review, made these further changes:
   public EV mobility dataset, and not real utility data.
 - Only 2 re-optimization checkpoints per day, so sub-checkpoint detection
   latency is still not resolved.
-- BESS degradation cost uses a linear energy-throughput proxy rather than
-  the full piecewise-DoD segments of eq. (6), for MILP tractability.
 - The Transformer, not the LSTM, is used in the operational scheduler
   (Sections 7.1-7.4) despite the LSTM's edge on the static benchmark — an
   LSTM-based or hybrid REB-S variant is flagged as future work, not done.
