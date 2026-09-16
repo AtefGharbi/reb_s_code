@@ -131,5 +131,4 @@ responding to a second, more detailed review, made these further changes:
 - The Transformer, not the LSTM, is used in the operational scheduler
   (Sections 7.1-7.4) despite the LSTM's edge on the static benchmark — an
   LSTM-based or hybrid REB-S variant is flagged as future work, not done.
-- No repository/DOI has actually been created yet; the paper's
-  Reproducibility Statement says so plainly rather than promising one.
+
