@@ -1,0 +1,5 @@
+detector,AUROC,AUPRC
+Transformer (REB-S),0.9135,0.9342
+LSTM,0.9394,0.9550
+IsolationForest,0.7682,0.7813
+CUSUM (operating point only),,

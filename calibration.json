@@ -1,0 +1,13 @@
+{
+  "target_fpr": 0.05,
+  "transformer_threshold": 0.635,
+  "transformer_val_recall": 0.6952319587628866,
+  "transformer_val_fpr": 0.049723756906077346,
+  "cusum_k": 0.001,
+  "cusum_h": 0.016,
+  "cusum_val_recall": 0.7010309278350515,
+  "cusum_val_fpr": 0.03660220994475138,
+  "val_seed": 502,
+  "val_n": 3000,
+  "note": "Thresholds selected on validation (seed=502) only, frozen before any test-set (seed=501) or operational-simulation evaluation."
+}

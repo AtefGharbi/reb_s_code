@@ -1,0 +1,5 @@
+method,completion_mean,completion_std,cost_mean,efc_mean,violations_mean
+Unaware (baseline),98.0,4.2163702135578385,-137.9533647961595,2.0197855111653453,0.2
+Margin only (no reconstruction),100.0,0.0,-131.72863798641825,1.9388549809090012,0.0
+Reconstruction only (no margin),94.0,6.992058987801011,-137.47825708331897,2.017703551687462,0.6
+Margin + reconstruction (full REB-S),100.0,0.0,-131.250272560649,1.936752068506377,0.0

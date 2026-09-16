@@ -1,0 +1,115 @@
+Loading trained Transformer detector...
+
+=== Table 2: operational performance (N=10 EV, 2 BESS, moderate attack, 20 seeds) ===
+          total_cost_mean  total_cost_std  ...  violations_mean  violations_std
+method                                     ...                                 
+nominal          -133.603          23.834  ...             0.00           0.000
+unaware          -134.033          23.466  ...             1.75           0.851
+reactive         -132.478          23.584  ...             1.50           0.688
+rebs             -127.744          23.521  ...             0.25           0.550
+
+[4 rows x 12 columns]
+
+--- Statistical significance (paired, same seeds) ---
+completion_rate_pct    REB-S vs unaware  : mean_diff=+15.000  Wilcoxon p=0.0001  t-test p=0.0000  Cohen's d=+1.73
+completion_rate_pct    REB-S vs reactive : mean_diff=+12.500  Wilcoxon p=0.0003  t-test p=0.0000  Cohen's d=+1.41
+total_cost             REB-S vs unaware  : mean_diff=+6.290  Wilcoxon p=0.0000  t-test p=0.0000  Cohen's d=+3.09
+total_cost             REB-S vs reactive : mean_diff=+4.734  Wilcoxon p=0.0000  t-test p=0.0000  Cohen's d=+2.43
+bess_efc               REB-S vs unaware  : mean_diff=-0.076  Wilcoxon p=0.0000  t-test p=0.0000  Cohen's d=-2.46
+bess_efc               REB-S vs reactive : mean_diff=-0.056  Wilcoxon p=0.0000  t-test p=0.0000  Cohen's d=-2.68
+
+=== Ablation study (REB-S components, 10 seeds, moderate attack) ===
+                         completion_mean  ...  violations_mean
+method                                    ...                 
+Full REB-S                          98.0  ...              0.2
+No state reconstruction             98.0  ...              0.2
+No robust departure                 85.0  ...              1.5
+No risk margin/derate               91.0  ...              0.9
+Detector only (all off)             83.0  ...              1.7
+
+[5 rows x 5 columns]
+
+=== Detection sweep: attack intensity (reactive vs rebs) ===
+delta=0.00 reactive  n=138 acc=1.000 prec=nan rec=nan f1=nan FA=0.000
+delta=0.00 rebs      n=138 acc=1.000 prec=nan rec=nan f1=nan FA=0.000
+delta=0.02 reactive  n=138 acc=0.710 prec=1.000 rec=0.048 f1=0.091 FA=0.000
+delta=0.02 rebs      n=138 acc=0.703 prec=1.000 rec=0.024 f1=0.047 FA=0.000
+delta=0.04 reactive  n=138 acc=0.797 prec=1.000 rec=0.333 f1=0.500 FA=0.000
+delta=0.04 rebs      n=138 acc=0.775 prec=1.000 rec=0.262 f1=0.415 FA=0.000
+delta=0.06 reactive  n=138 acc=0.855 prec=1.000 rec=0.524 f1=0.688 FA=0.000
+delta=0.06 rebs      n=138 acc=0.884 prec=1.000 rec=0.619 f1=0.765 FA=0.000
+delta=0.08 reactive  n=138 acc=0.913 prec=1.000 rec=0.714 f1=0.833 FA=0.000
+delta=0.08 rebs      n=138 acc=0.920 prec=1.000 rec=0.738 f1=0.849 FA=0.000
+delta=0.10 reactive  n=138 acc=0.928 prec=1.000 rec=0.762 f1=0.865 FA=0.000
+delta=0.10 rebs      n=138 acc=0.957 prec=1.000 rec=0.857 f1=0.923 FA=0.000
+
+=== Detection sweep: attack coverage (reactive vs rebs) ===
+coverage=0.1 reactive  n=138 acc=0.993 prec=1.000 rec=0.857 f1=0.923
+coverage=0.1 rebs      n=138 acc=0.978 prec=1.000 rec=0.571 f1=0.727
+coverage=0.2 reactive  n=138 acc=0.971 prec=1.000 rec=0.692 f1=0.818
+coverage=0.2 rebs      n=138 acc=0.986 prec=1.000 rec=0.846 f1=0.917
+coverage=0.4 reactive  n=138 acc=0.855 prec=1.000 rec=0.524 f1=0.688
+coverage=0.4 rebs      n=138 acc=0.884 prec=1.000 rec=0.619 f1=0.765
+coverage=0.6 reactive  n=138 acc=0.877 prec=1.000 rec=0.630 f1=0.773
+coverage=0.6 rebs      n=138 acc=0.870 prec=1.000 rec=0.609 f1=0.757
+coverage=0.8 reactive  n=138 acc=0.797 prec=1.000 rec=0.611 f1=0.759
+coverage=0.8 rebs      n=138 acc=0.790 prec=1.000 rec=0.597 f1=0.748
+
+=== Table 3 summary: POOLED confusion matrix (fixes mean-of-F1 bug) ===
+          accuracy  precision  recall     f1  false_alarm_rate       n
+reactive     0.870        1.0   0.538  0.700               0.0  1380.0
+rebs         0.875        1.0   0.556  0.715               0.0  1380.0
+  sanity check reactive: reported F1=0.7000 vs recomputed 2PR/(P+R)=0.7000  (should match)
+  sanity check rebs: reported F1=0.7150 vs recomputed 2PR/(P+R)=0.7150  (should match)
+
+=== Scalability sweep (REB-S) ===
+{'n_ev': 5, 'n_bess': 1, 'mean_solve_time': 0.06836628913879395, 'max_solve_time': 0.08069229125976562, 'n_detection_calls': 7, 'wall_time_total': 0.144608736038208, 'peak_rss_mb': 606.828125}
+{'n_ev': 10, 'n_bess': 2, 'mean_solve_time': 0.1272505521774292, 'max_solve_time': 0.15561819076538086, 'n_detection_calls': 14, 'wall_time_total': 0.26639318466186523, 'peak_rss_mb': 606.828125}
+{'n_ev': 20, 'n_bess': 4, 'mean_solve_time': 0.32912540435791016, 'max_solve_time': 0.3998415470123291, 'n_detection_calls': 28, 'wall_time_total': 0.6799008846282959, 'peak_rss_mb': 611.203125}
+{'n_ev': 40, 'n_bess': 8, 'mean_solve_time': 0.735477089881897, 'max_solve_time': 0.966848611831665, 'n_detection_calls': 54, 'wall_time_total': 1.5122158527374268, 'peak_rss_mb': 620.578125}
+{'n_ev': 80, 'n_bess': 16, 'mean_solve_time': 1.897709846496582, 'max_solve_time': 2.260876417160034, 'n_detection_calls': 108, 'wall_time_total': 3.8815736770629883, 'peak_rss_mb': 640.0625}
+
+All experiments complete. Results written to ./results/
+
+=== SoC-spoofing-ONLY ablation (tau_max=0, no departure-time attack) ===
+                                      completion_mean  ...  violations_mean
+method                                                 ...                 
+Unaware (baseline)                               98.0  ...              0.2
+Margin only (no reconstruction)                 100.0  ...              0.0
+Reconstruction only (no margin)                  94.0  ...              0.6
+Margin + reconstruction (full REB-S)            100.0  ...              0.0
+
+[4 rows x 5 columns]
+
+=== tau_cap sweep (robust-departure trust bound, moderate joint attack) ===
+               completion_mean  completion_std  cost_mean  violations_mean
+tau_cap_hours                                                             
+0.0                       98.0           6.325   -131.182              0.2
+0.5                       90.0           8.165   -131.271              1.0
+1.0                       85.0           7.071   -131.180              1.5
+2.0                       85.0           7.071   -131.181              1.5
+
+=== Detection sweep: attack coverage, 30 seeds (was 10) ===
+coverage=0.1 reactive  n= 405 acc=0.980 prec=1.000 rec=0.652 f1=0.789
+coverage=0.1 rebs      n= 405 acc=0.973 prec=1.000 rec=0.522 f1=0.686
+coverage=0.2 reactive  n= 405 acc=0.978 prec=1.000 rec=0.775 f1=0.873
+coverage=0.2 rebs      n= 405 acc=0.960 prec=1.000 rec=0.600 f1=0.750
+coverage=0.4 reactive  n= 405 acc=0.896 prec=1.000 rec=0.611 f1=0.759
+coverage=0.4 rebs      n= 405 acc=0.879 prec=0.984 rec=0.556 f1=0.710
+coverage=0.6 reactive  n= 405 acc=0.842 prec=1.000 rec=0.556 f1=0.714
+coverage=0.6 rebs      n= 405 acc=0.857 prec=0.978 rec=0.611 f1=0.752
+coverage=0.8 reactive  n= 405 acc=0.805 prec=1.000 rec=0.626 f1=0.770
+coverage=0.8 rebs      n= 405 acc=0.758 prec=0.991 rec=0.540 f1=0.699
+
+=== Extended scalability sweep (REB-S), with measured detector inference time ===
+{'n_ev': 5, 'n_bess': 1, 'mean_solve_time': 0.055739641189575195, 'max_solve_time': 0.06602621078491211, 'n_detection_calls': 7, 'measured_inference_ms': 0.3934144973754883, 'wall_time_total': 0.11682963371276855, 'peak_rss_mb': 640.0625}
+{'n_ev': 10, 'n_bess': 2, 'mean_solve_time': 0.1077190637588501, 'max_solve_time': 0.1306004524230957, 'n_detection_calls': 14, 'measured_inference_ms': 0.5707859992980957, 'wall_time_total': 0.22548937797546387, 'peak_rss_mb': 640.0625}
+{'n_ev': 20, 'n_bess': 4, 'mean_solve_time': 0.26145458221435547, 'max_solve_time': 0.30742716789245605, 'n_detection_calls': 28, 'measured_inference_ms': 1.1320710182189941, 'wall_time_total': 0.542172908782959, 'peak_rss_mb': 640.0625}
+{'n_ev': 40, 'n_bess': 8, 'mean_solve_time': 0.698144793510437, 'max_solve_time': 0.8938825130462646, 'n_detection_calls': 54, 'measured_inference_ms': 2.0733237266540527, 'wall_time_total': 1.4352285861968994, 'peak_rss_mb': 640.0625}
+{'n_ev': 80, 'n_bess': 16, 'mean_solve_time': 1.8266319036483765, 'max_solve_time': 2.0698835849761963, 'n_detection_calls': 108, 'measured_inference_ms': 3.666532039642334, 'wall_time_total': 3.7298338413238525, 'peak_rss_mb': 640.27734375}
+{'n_ev': 100, 'n_bess': 20, 'mean_solve_time': 2.41963529586792, 'max_solve_time': 2.9380247592926025, 'n_detection_calls': 136, 'measured_inference_ms': 3.8269400596618652, 'wall_time_total': 4.925190687179565, 'peak_rss_mb': 649.91015625}
+{'n_ev': 160, 'n_bess': 32, 'mean_solve_time': 7.252914309501648, 'max_solve_time': 8.499629259109497, 'n_detection_calls': 213, 'measured_inference_ms': 6.308150291442871, 'wall_time_total': 14.645938158035278, 'peak_rss_mb': 680.33984375}
+{'n_ev': 200, 'n_bess': 40, 'mean_solve_time': 9.92654573917389, 'max_solve_time': 10.975812196731567, 'n_detection_calls': 268, 'measured_inference_ms': 7.928955554962157, 'wall_time_total': 20.05351710319519, 'peak_rss_mb': 700.33203125}
+
+All round-2 experiments complete.
+hardware/software info: {'python': '3.12.3', 'torch': '2.13.0+cu130', 'platform': 'Linux-6.18.44-fc-v21-x86_64-with-glibc2.39', 'processor': 'x86_64', 'pulp': '3.3.2'}
